@@ -1,0 +1,70 @@
+Delete N nodes after M nodes of a linked list
+Difficulty: EasyAccuracy: 32.83%Submissions: 57K+Points: 2
+Given a linked list, delete n nodes after skipping m nodes of a linked list until the last of the linked list.
+Examples:
+
+Input: Linked List: 9->1->3->5->9->4->10->1, n = 1, m = 2
+
+Output: 9->1->5->9->10->1
+
+Explanation: Deleting 1 node after skipping 2 nodes each time, we have list as 9-> 1-> 5-> 9-> 10-> 1.
+Input: Linked List: 1->2->3->4->5->6, n = 1, m = 6
+
+Output: 1->2->3->4->5->6
+
+Explanation: After skipping 6 nodes for the first time , we will reach of end of the linked list, so, we will get the given linked list itself.
+Expected Time Complexity: O(n)
+Expected Space Complexity: O(1)
+
+Constraints:
+1 <= size of linked list <= 1000
+0 < n, m <= size of linked list
+
+
+Solution :
+
+
+
+// User function Template for Java
+
+/*
+delete n nodes after m nodes
+The input list will have at least one element
+Node is defined as
+  class Node
+  {
+      int data;
+      Node next;
+      Node(int data)
+      {
+          this.data = data;
+          this.next = null;
+      }
+  }
+*/
+
+class Solution {
+    static void linkdelete(Node head, int n, int m) {
+        // your code here
+      Node curr = head;
+
+        while (curr != null) {
+            // Move `m-1` steps ahead to reach the node before deletion starts
+            for (int count = 1; count < m && curr != null; count++) {
+                curr = curr.next;
+            }
+            
+            if (curr == null) return; // If we reach the end, exit
+
+            // Start deleting `n` nodes
+            Node temp = curr.next; // Pointer to the first node to delete
+            for (int count = 1; count <= n && temp != null; count++) {
+                temp = temp.next;
+            }
+
+            // Connect the remaining list after deletion
+            curr.next = temp;
+            curr = temp; // Move `curr` forward for the next iteration
+        }
+    }
+}
