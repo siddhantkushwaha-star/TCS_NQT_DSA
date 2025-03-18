@@ -1,0 +1,43 @@
+GFG : nth root of m
+
+  int low = 1, high = m;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            long power = power(mid, n, m); // Compute mid^n
+
+            if (power == m) return mid;
+            else if (power > m) high = mid - 1;
+            else low = mid + 1;
+        }
+        
+        return -1;
+    }
+
+    // Function to compute x^n with upper bound check
+    private long power(int x, int n, int m) {
+        long result = 1;
+        for (int i = 0; i < n; i++) {
+            result *= x;
+            if (result > m) return result; // Stop early if exceeded m
+        }
+        return result;
+
+
+GFG   Find nth root of m
+Difficulty: EasyAccuracy: 25.06%Submissions: 196K+Points: 2Average Time: 15m
+You are given 2 numbers n and m, the task is to find n√m (nth root of m). If the root is not integer then returns -1.
+
+Examples :
+
+Input: n = 2, m = 9
+Output: 3
+Explanation: 32 = 9
+Input: n = 3, m = 9
+Output: -1
+Explanation: 3rd root of 9 is not integer.
+Input: n = 1, m = 14
+Output: 14
+Constraints:
+1 <= n <= 30
+1 <= m <= 109
